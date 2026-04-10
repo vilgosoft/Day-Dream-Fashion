@@ -1,0 +1,17 @@
+{
+  "name": "daydream/fashion-api",
+  "description": "Day Dream Fashion — PHP REST API",
+  "type": "project",
+  "require": {
+    "php": ">=8.1",
+    "firebase/php-jwt": "^6.10",
+    "phpmailer/phpmailer": "^6.9",
+    "vlucas/phpdotenv": "^5.6",
+    "razorpay/razorpay": "^2.9"
+  },
+  "autoload": {
+    "psr-4": {
+      "App\\": "."
+    }
+  }
+}

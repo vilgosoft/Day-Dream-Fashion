@@ -1,0 +1,12 @@
+RewriteEngine On
+
+# Redirect all requests to public/index.php
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ public/index.php [QSA,L]
+
+# Deny access to sensitive files
+<FilesMatch "\.(env|json|lock|md|sql)$">
+    Order allow,deny
+    Deny from all
+</FilesMatch>
