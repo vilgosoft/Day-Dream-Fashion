@@ -1,0 +1,100 @@
+@use '../../styles/variables' as *;
+@use '../../styles/mixins' as *;
+
+.admin-layout {
+  display: flex;
+  min-height: 100vh;
+
+  &__sidebar {
+    width: 240px;
+    background: $color-primary;
+    color: $color-white;
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    z-index: 100;
+  }
+
+  &__brand {
+    padding: $spacing-lg $spacing-md;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+
+    a {
+      font-family: $font-heading;
+      font-size: $font-size-lg;
+      color: $color-white;
+      text-decoration: none;
+
+      span {
+        color: $color-secondary;
+        font-weight: 700;
+      }
+    }
+  }
+
+  &__nav {
+    flex: 1;
+    padding: $spacing-md 0;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  &__nav-link {
+    display: flex;
+    align-items: center;
+    gap: $spacing-sm;
+    padding: $spacing-sm $spacing-lg;
+    color: $color-gray-400;
+    text-decoration: none;
+    font-size: $font-size-sm;
+    font-weight: 500;
+    transition: all $transition-fast;
+    border-left: 3px solid transparent;
+
+    svg {
+      font-size: 1.1rem;
+    }
+
+    &:hover {
+      color: $color-white;
+      background: rgba(255, 255, 255, 0.05);
+    }
+
+    &--active {
+      color: $color-white;
+      background: rgba(255, 255, 255, 0.1);
+      border-left-color: $color-secondary;
+    }
+  }
+
+  &__logout {
+    display: flex;
+    align-items: center;
+    gap: $spacing-sm;
+    padding: $spacing-md $spacing-lg;
+    color: $color-gray-400;
+    background: none;
+    border: none;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    cursor: pointer;
+    font-size: $font-size-sm;
+    font-weight: 500;
+    transition: color $transition-fast;
+
+    &:hover {
+      color: $color-secondary;
+    }
+  }
+
+  &__content {
+    flex: 1;
+    margin-left: 240px;
+    padding: $spacing-xl;
+    background: $color-gray-100;
+    min-height: 100vh;
+  }
+}

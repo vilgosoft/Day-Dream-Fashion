@@ -1,0 +1,322 @@
+@use '../styles/variables' as *;
+@use '../styles/mixins' as *;
+
+.cart {
+  padding: $spacing-xl 0 $spacing-3xl;
+
+  &__container {
+    @include container;
+  }
+
+  &__loading {
+    @include flex-center;
+    padding: $spacing-3xl;
+    color: $color-gray-500;
+  }
+
+  &__empty {
+    @include flex-center;
+    flex-direction: column;
+    padding: $spacing-3xl;
+    text-align: center;
+
+    &-icon {
+      font-size: 3rem;
+      color: $color-gray-300;
+      margin-bottom: $spacing-lg;
+    }
+
+    h2 {
+      font-family: $font-heading;
+      color: $color-primary;
+      margin-bottom: $spacing-sm;
+    }
+
+    p {
+      color: $color-gray-500;
+      margin-bottom: $spacing-xl;
+    }
+  }
+
+  &__continue-btn {
+    @include btn-base;
+    padding: 12px 28px;
+    background: $color-secondary;
+    color: $color-white;
+    border-radius: $border-radius-full;
+    text-decoration: none;
+    font-weight: 600;
+
+    &:hover {
+      background: darken($color-secondary, 8%);
+    }
+  }
+
+  // ── Header ──────────────────────────────────────────
+  &__header {
+    @include flex-between;
+    margin-bottom: $spacing-xl;
+  }
+
+  &__title {
+    font-family: $font-heading;
+    font-size: $font-size-2xl;
+    color: $color-primary;
+  }
+
+  &__clear-btn {
+    @include btn-base;
+    padding: 8px 16px;
+    font-size: $font-size-sm;
+    color: $color-danger;
+    background: rgba($color-danger, 0.08);
+    border: none;
+    border-radius: $border-radius-md;
+
+    &:hover {
+      background: rgba($color-danger, 0.15);
+    }
+  }
+
+  // ── Layout ──────────────────────────────────────────
+  &__layout {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-xl;
+
+    @include respond-to(lg) {
+      flex-direction: row;
+      align-items: flex-start;
+    }
+  }
+
+  // ── Items ───────────────────────────────────────────
+  &__items {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-md;
+  }
+
+  &__item {
+    display: flex;
+    gap: $spacing-md;
+    padding: $spacing-md;
+    border: 1px solid $color-gray-200;
+    border-radius: $border-radius-lg;
+    background: $color-white;
+    transition: opacity $transition-fast;
+    flex-wrap: wrap;
+
+    &--updating {
+      opacity: 0.6;
+      pointer-events: none;
+    }
+
+    @include respond-to(md) {
+      flex-wrap: nowrap;
+      align-items: center;
+    }
+  }
+
+  &__item-image {
+    width: 100px;
+    height: 130px;
+    flex-shrink: 0;
+    border-radius: $border-radius-md;
+    overflow: hidden;
+    background: $color-gray-100;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+
+  &__item-details {
+    flex: 1;
+    min-width: 0;
+  }
+
+  &__item-name {
+    display: block;
+    font-weight: 600;
+    color: $color-gray-900;
+    text-decoration: none;
+    margin-bottom: $spacing-xs;
+    line-height: 1.3;
+
+    &:hover {
+      color: $color-secondary;
+    }
+  }
+
+  &__item-meta {
+    display: flex;
+    gap: $spacing-md;
+    font-size: $font-size-sm;
+    color: $color-gray-500;
+    margin-bottom: $spacing-sm;
+  }
+
+  &__item-price {
+    font-weight: 600;
+    color: $color-primary;
+  }
+
+  &__item-actions {
+    display: flex;
+    align-items: center;
+    gap: $spacing-lg;
+    width: 100%;
+
+    @include respond-to(md) {
+      width: auto;
+    }
+  }
+
+  &__item-quantity {
+    display: flex;
+    align-items: center;
+    border: 1px solid $color-gray-300;
+    border-radius: $border-radius-md;
+    overflow: hidden;
+  }
+
+  &__qty-btn {
+    @include flex-center;
+    width: 32px;
+    height: 36px;
+    background: $color-gray-100;
+    border: none;
+    cursor: pointer;
+    color: $color-gray-700;
+    transition: background $transition-fast;
+
+    &:hover:not(:disabled) {
+      background: $color-gray-200;
+    }
+
+    &:disabled {
+      color: $color-gray-400;
+      cursor: not-allowed;
+    }
+  }
+
+  &__qty-value {
+    width: 36px;
+    text-align: center;
+    font-weight: 600;
+    font-size: $font-size-sm;
+  }
+
+  &__item-subtotal {
+    font-size: $font-size-lg;
+    font-weight: 700;
+    color: $color-primary;
+    min-width: 80px;
+    text-align: right;
+  }
+
+  &__remove-btn {
+    @include flex-center;
+    width: 36px;
+    height: 36px;
+    border: none;
+    background: none;
+    cursor: pointer;
+    color: $color-gray-400;
+    font-size: 1.1rem;
+    border-radius: $border-radius-md;
+    transition: all $transition-fast;
+
+    &:hover {
+      color: $color-danger;
+      background: rgba($color-danger, 0.08);
+    }
+  }
+
+  // ── Summary ─────────────────────────────────────────
+  &__summary {
+    width: 100%;
+    background: $color-gray-100;
+    border-radius: $border-radius-lg;
+    padding: $spacing-xl;
+    border: 1px solid $color-gray-200;
+
+    @include respond-to(lg) {
+      width: 360px;
+      flex-shrink: 0;
+      position: sticky;
+      top: 100px;
+    }
+  }
+
+  &__summary-title {
+    font-family: $font-heading;
+    font-size: $font-size-lg;
+    color: $color-primary;
+    margin-bottom: $spacing-lg;
+  }
+
+  &__summary-row {
+    @include flex-between;
+    margin-bottom: $spacing-sm;
+    font-size: $font-size-base;
+    color: $color-gray-700;
+
+    &--total {
+      font-size: $font-size-lg;
+      font-weight: 700;
+      color: $color-primary;
+      margin-bottom: 0;
+    }
+  }
+
+  &__summary-divider {
+    border-top: 1px solid $color-gray-300;
+    margin: $spacing-md 0;
+  }
+
+  &__summary-hint {
+    font-size: $font-size-sm;
+    color: $color-secondary;
+    text-align: center;
+    margin-top: $spacing-md;
+    padding: 8px;
+    background: rgba($color-secondary, 0.08);
+    border-radius: $border-radius-md;
+  }
+
+  &__checkout-btn {
+    @include btn-base;
+    width: 100%;
+    padding: 14px;
+    background: $color-secondary;
+    color: $color-white;
+    font-weight: 600;
+    font-size: $font-size-base;
+    border-radius: $border-radius-md;
+    margin-top: $spacing-lg;
+    gap: 8px;
+
+    &:hover {
+      background: darken($color-secondary, 8%);
+      transform: translateY(-1px);
+    }
+  }
+
+  &__continue-link {
+    display: block;
+    text-align: center;
+    margin-top: $spacing-md;
+    font-size: $font-size-sm;
+    color: $color-gray-600;
+    text-decoration: none;
+
+    &:hover {
+      color: $color-secondary;
+    }
+  }
+}

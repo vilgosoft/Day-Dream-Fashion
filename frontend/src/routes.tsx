@@ -1,6 +1,10 @@
 import { Routes, Route } from 'react-router-dom';
 
-// Pages — will be implemented in subsequent steps
+// Layouts
+import MainLayout from './components/layout/MainLayout';
+import AdminLayout from './components/layout/AdminLayout';
+
+// Pages
 import Home from './pages/Home';
 import Shop from './pages/Shop';
 import ProductDetail from './pages/ProductDetail';
@@ -18,28 +22,36 @@ import CategoryManagement from './pages/admin/CategoryManagement';
 import UserManagement from './pages/admin/UserManagement';
 import OrderManagement from './pages/admin/OrderManagement';
 import InventoryManagement from './pages/admin/InventoryManagement';
+import ContactMessages from './pages/admin/ContactMessages';
 
 export function AppRoutes() {
   return (
     <Routes>
-      {/* Public Routes */}
-      <Route path="/" element={<Home />} />
-      <Route path="/shop" element={<Shop />} />
-      <Route path="/product/:slug" element={<ProductDetail />} />
-      <Route path="/cart" element={<Cart />} />
-      <Route path="/checkout" element={<Checkout />} />
-      <Route path="/contact" element={<Contact />} />
-      <Route path="/login" element={<Login />} />
-      <Route path="/signup" element={<Signup />} />
+      {/* Public routes with Header + Footer */}
+      <Route element={<MainLayout />}>
+        <Route path="/" element={<Home />} />
+        <Route path="/shop" element={<Shop />} />
+        <Route path="/product/:slug" element={<ProductDetail />} />
+        <Route path="/cart" element={<Cart />} />
+        <Route path="/checkout" element={<Checkout />} />
+        <Route path="/contact" element={<Contact />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<Signup />} />
+      </Route>
 
-      {/* Admin Routes */}
+      {/* Admin login (no sidebar) */}
       <Route path="/admin/login" element={<AdminLogin />} />
-      <Route path="/admin/dashboard" element={<Dashboard />} />
-      <Route path="/admin/products" element={<ProductManagement />} />
-      <Route path="/admin/categories" element={<CategoryManagement />} />
-      <Route path="/admin/users" element={<UserManagement />} />
-      <Route path="/admin/orders" element={<OrderManagement />} />
-      <Route path="/admin/inventory" element={<InventoryManagement />} />
+
+      {/* Admin routes with sidebar */}
+      <Route element={<AdminLayout />}>
+        <Route path="/admin/dashboard" element={<Dashboard />} />
+        <Route path="/admin/products" element={<ProductManagement />} />
+        <Route path="/admin/categories" element={<CategoryManagement />} />
+        <Route path="/admin/users" element={<UserManagement />} />
+        <Route path="/admin/orders" element={<OrderManagement />} />
+        <Route path="/admin/inventory" element={<InventoryManagement />} />
+        <Route path="/admin/contacts" element={<ContactMessages />} />
+      </Route>
     </Routes>
   );
 }

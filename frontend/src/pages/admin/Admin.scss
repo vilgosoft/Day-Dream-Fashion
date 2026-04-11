@@ -1,0 +1,718 @@
+@use '../../styles/variables' as *;
+@use '../../styles/mixins' as *;
+
+// ── Admin Login ───────────────────────────────────────
+.admin-login {
+  min-height: 100vh;
+  @include flex-center;
+  background: $color-primary;
+  padding: $spacing-xl;
+
+  &__card {
+    width: 100%;
+    max-width: 400px;
+    background: $color-white;
+    border-radius: $border-radius-lg;
+    padding: $spacing-2xl;
+    box-shadow: $shadow-lg;
+  }
+
+  &__header {
+    text-align: center;
+    margin-bottom: $spacing-xl;
+  }
+
+  &__brand {
+    font-family: $font-heading;
+    font-size: $font-size-3xl;
+    color: $color-secondary;
+    margin-bottom: $spacing-xs;
+  }
+
+  &__title {
+    font-size: $font-size-lg;
+    color: $color-primary;
+    font-weight: 600;
+  }
+
+  &__subtitle {
+    font-size: $font-size-sm;
+    color: $color-gray-500;
+    margin-top: $spacing-xs;
+  }
+
+  &__form {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-lg;
+  }
+
+  &__field {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-xs;
+
+    label {
+      font-size: $font-size-sm;
+      font-weight: 600;
+      color: $color-gray-700;
+    }
+
+    input {
+      padding: 12px 16px;
+      border: 1px solid $color-gray-300;
+      border-radius: $border-radius-md;
+      font-size: $font-size-base;
+
+      &:focus {
+        outline: none;
+        border-color: $color-secondary;
+        box-shadow: 0 0 0 3px rgba($color-secondary, 0.1);
+      }
+    }
+  }
+
+  &__submit {
+    @include btn-base;
+    padding: 14px;
+    background: $color-secondary;
+    color: $color-white;
+    font-weight: 600;
+    border-radius: $border-radius-md;
+
+    &:hover:not(:disabled) {
+      background: darken($color-secondary, 8%);
+    }
+
+    &:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+  }
+}
+
+// ── Admin Page Layout ─────────────────────────────────
+.admin-page {
+  padding: $spacing-lg;
+
+  &__header {
+    @include flex-between;
+    margin-bottom: $spacing-xl;
+    flex-wrap: wrap;
+    gap: $spacing-md;
+  }
+
+  &__title {
+    font-size: $font-size-2xl;
+    font-weight: 700;
+    color: $color-primary;
+  }
+
+  &__add-btn {
+    @include btn-base;
+    padding: 10px 20px;
+    background: $color-secondary;
+    color: $color-white;
+    font-weight: 600;
+    font-size: $font-size-sm;
+    border-radius: $border-radius-md;
+    gap: 6px;
+
+    &:hover {
+      background: darken($color-secondary, 8%);
+    }
+  }
+
+  &__loading {
+    @include flex-center;
+    padding: $spacing-3xl;
+    color: $color-gray-500;
+  }
+}
+
+// ── Dashboard Stats ───────────────────────────────────
+.admin-dashboard__stats {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: $spacing-md;
+
+  @include respond-to(md) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.admin-dashboard__stat-card {
+  display: flex;
+  align-items: center;
+  gap: $spacing-md;
+  padding: $spacing-lg;
+  background: $color-white;
+  border-radius: $border-radius-lg;
+  border: 1px solid $color-gray-200;
+  text-decoration: none;
+  transition: transform $transition-fast, box-shadow $transition-fast;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: $shadow-md;
+  }
+}
+
+.admin-dashboard__stat-icon {
+  @include flex-center;
+  width: 48px;
+  height: 48px;
+  border-radius: $border-radius-lg;
+  font-size: 1.3rem;
+  flex-shrink: 0;
+}
+
+.admin-dashboard__stat-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.admin-dashboard__stat-value {
+  font-size: $font-size-xl;
+  font-weight: 700;
+  color: $color-primary;
+}
+
+.admin-dashboard__stat-label {
+  font-size: $font-size-sm;
+  color: $color-gray-500;
+}
+
+// ── Admin Table ───────────────────────────────────────
+.admin-table-wrapper {
+  background: $color-white;
+  border-radius: $border-radius-lg;
+  border: 1px solid $color-gray-200;
+  overflow-x: auto;
+}
+
+.admin-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: $font-size-sm;
+
+  th {
+    text-align: left;
+    padding: 12px 16px;
+    background: $color-gray-100;
+    color: $color-gray-700;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-size: $font-size-xs;
+    white-space: nowrap;
+    border-bottom: 1px solid $color-gray-200;
+  }
+
+  td {
+    padding: 12px 16px;
+    color: $color-gray-700;
+    border-bottom: 1px solid $color-gray-200;
+    vertical-align: middle;
+  }
+
+  tbody tr:hover {
+    background: $color-gray-100;
+  }
+
+  &__thumb {
+    width: 44px;
+    height: 44px;
+    border-radius: $border-radius-md;
+    overflow: hidden;
+    background: $color-gray-100;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+
+  &__badges {
+    display: flex;
+    gap: 4px;
+    margin-top: 4px;
+  }
+
+  &__actions {
+    display: flex;
+    gap: $spacing-xs;
+  }
+
+  &__action-btn {
+    @include flex-center;
+    width: 32px;
+    height: 32px;
+    border-radius: $border-radius-md;
+    border: 1px solid $color-gray-300;
+    background: $color-white;
+    cursor: pointer;
+    color: $color-gray-600;
+    transition: all $transition-fast;
+
+    &:hover {
+      border-color: $color-secondary;
+      color: $color-secondary;
+    }
+
+    &--danger:hover {
+      border-color: $color-danger;
+      color: $color-danger;
+    }
+
+    &--save {
+      border-color: $color-success;
+      color: $color-success;
+
+      &:hover {
+        background: $color-success;
+        color: $color-white;
+      }
+    }
+  }
+
+  &__status-btn {
+    @include btn-base;
+    padding: 4px 12px;
+    font-size: $font-size-xs;
+    border-radius: $border-radius-md;
+    font-weight: 500;
+
+    &--block {
+      background: rgba($color-danger, 0.1);
+      color: $color-danger;
+
+      &:hover { background: rgba($color-danger, 0.2); }
+    }
+
+    &--activate {
+      background: rgba($color-success, 0.1);
+      color: $color-success;
+
+      &:hover { background: rgba($color-success, 0.2); }
+    }
+  }
+
+  &__stock-input {
+    width: 80px;
+    padding: 6px 8px;
+    border: 1px solid $color-gray-300;
+    border-radius: $border-radius-sm;
+    font-size: $font-size-sm;
+    text-align: center;
+
+    &:focus {
+      outline: none;
+      border-color: $color-secondary;
+    }
+  }
+
+  &__mono {
+    font-family: monospace;
+    font-size: $font-size-xs;
+    color: $color-gray-500;
+  }
+
+  &__row--danger {
+    background: rgba($color-danger, 0.04) !important;
+  }
+
+  &__row--warning {
+    background: rgba($color-warning, 0.06) !important;
+  }
+}
+
+// ── Admin Badge ───────────────────────────────────────
+.admin-badge {
+  display: inline-block;
+  padding: 2px 10px;
+  font-size: 11px;
+  font-weight: 600;
+  border-radius: $border-radius-full;
+  text-transform: capitalize;
+
+  &--active, &--success { background: rgba($color-success, 0.12); color: $color-success; }
+  &--inactive, &--danger { background: rgba($color-danger, 0.12); color: $color-danger; }
+  &--draft { background: rgba($color-gray-500, 0.12); color: $color-gray-600; }
+  &--featured { background: rgba($color-highlight, 0.2); color: darken($color-highlight, 20%); }
+  &--trending { background: rgba($color-secondary, 0.12); color: $color-secondary; }
+  &--warning { background: rgba($color-warning, 0.15); color: darken($color-warning, 15%); }
+  &--info { background: rgba($color-info, 0.12); color: $color-info; }
+}
+
+// ── Admin Select ──────────────────────────────────────
+.admin-select {
+  padding: 4px 8px;
+  border: 1px solid $color-gray-300;
+  border-radius: $border-radius-sm;
+  font-size: $font-size-xs;
+  cursor: pointer;
+
+  &:focus { outline: none; border-color: $color-secondary; }
+}
+
+// ── Admin Pagination ──────────────────────────────────
+.admin-pagination {
+  display: flex;
+  justify-content: center;
+  gap: $spacing-xs;
+  padding: $spacing-lg;
+
+  &__btn {
+    @include flex-center;
+    width: 36px;
+    height: 36px;
+    border: 1px solid $color-gray-300;
+    border-radius: $border-radius-md;
+    background: $color-white;
+    cursor: pointer;
+    font-size: $font-size-sm;
+    transition: all $transition-fast;
+
+    &:hover {
+      border-color: $color-secondary;
+      color: $color-secondary;
+    }
+
+    &--active {
+      background: $color-secondary;
+      color: $color-white;
+      border-color: $color-secondary;
+    }
+  }
+}
+
+// ── Admin Modal ───────────────────────────────────────
+.admin-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 1100;
+  @include flex-center;
+  padding: $spacing-lg;
+
+  &__overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+  }
+
+  &__content {
+    position: relative;
+    width: 100%;
+    max-width: 560px;
+    max-height: 90vh;
+    overflow-y: auto;
+    background: $color-white;
+    border-radius: $border-radius-lg;
+    box-shadow: $shadow-lg;
+
+    &--wide {
+      max-width: 720px;
+    }
+  }
+
+  &__header {
+    @include flex-between;
+    padding: $spacing-lg $spacing-xl;
+    border-bottom: 1px solid $color-gray-200;
+
+    h2 {
+      font-size: $font-size-lg;
+      font-weight: 600;
+      color: $color-primary;
+    }
+  }
+
+  &__close {
+    @include flex-center;
+    width: 32px;
+    height: 32px;
+    border: none;
+    background: none;
+    cursor: pointer;
+    color: $color-gray-500;
+    font-size: 1.2rem;
+
+    &:hover { color: $color-primary; }
+  }
+
+  &__form {
+    padding: $spacing-xl;
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-lg;
+  }
+
+  &__row {
+    display: flex;
+    gap: $spacing-lg;
+    flex-wrap: wrap;
+
+    .admin-modal__field {
+      flex: 1;
+      min-width: 200px;
+    }
+  }
+
+  &__field {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-xs;
+
+    label {
+      font-size: $font-size-sm;
+      font-weight: 600;
+      color: $color-gray-700;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    input, select, textarea {
+      padding: 10px 14px;
+      border: 1px solid $color-gray-300;
+      border-radius: $border-radius-md;
+      font-size: $font-size-sm;
+      font-family: $font-primary;
+
+      &:focus {
+        outline: none;
+        border-color: $color-secondary;
+      }
+    }
+
+    textarea {
+      resize: vertical;
+    }
+
+    input[type="file"] {
+      padding: 8px;
+      border: 1px dashed $color-gray-300;
+    }
+
+    input[type="color"] {
+      width: 40px;
+      height: 36px;
+      padding: 2px;
+      cursor: pointer;
+    }
+
+    &--checkboxes {
+      flex-direction: row;
+      gap: $spacing-lg;
+      align-items: center;
+      padding-top: 24px;
+
+      label {
+        display: flex;
+        align-items: center;
+        gap: $spacing-xs;
+        font-weight: 400;
+        cursor: pointer;
+
+        input[type="checkbox"] {
+          accent-color: $color-secondary;
+        }
+      }
+    }
+  }
+
+  &__actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: $spacing-md;
+    padding-top: $spacing-md;
+    border-top: 1px solid $color-gray-200;
+  }
+
+  &__cancel {
+    @include btn-base;
+    padding: 10px 20px;
+    background: $color-gray-100;
+    color: $color-gray-700;
+    border-radius: $border-radius-md;
+
+    &:hover { background: $color-gray-200; }
+  }
+
+  &__submit {
+    @include btn-base;
+    padding: 10px 24px;
+    background: $color-secondary;
+    color: $color-white;
+    font-weight: 600;
+    border-radius: $border-radius-md;
+
+    &:hover { background: darken($color-secondary, 8%); }
+  }
+}
+
+// ── Order Detail ──────────────────────────────────────
+.admin-order-detail {
+  padding: $spacing-xl;
+
+  &__meta {
+    display: flex;
+    gap: $spacing-xl;
+    margin-bottom: $spacing-lg;
+
+    p { font-size: $font-size-sm; color: $color-gray-700; }
+    strong { color: $color-primary; }
+  }
+
+  &__address {
+    background: $color-gray-100;
+    padding: $spacing-md;
+    border-radius: $border-radius-md;
+    margin-bottom: $spacing-lg;
+
+    h4 {
+      font-size: $font-size-sm;
+      font-weight: 600;
+      color: $color-primary;
+      margin-bottom: $spacing-xs;
+    }
+
+    p {
+      font-size: $font-size-sm;
+      color: $color-gray-700;
+      line-height: 1.5;
+    }
+  }
+
+  &__totals {
+    text-align: right;
+    padding: $spacing-md 16px;
+
+    p {
+      font-size: $font-size-sm;
+      color: $color-gray-700;
+      margin-bottom: 4px;
+    }
+  }
+
+  &__total {
+    font-size: $font-size-lg !important;
+    font-weight: 700;
+    color: $color-primary !important;
+  }
+
+  &__notes {
+    margin-top: $spacing-lg;
+    padding: $spacing-md;
+    background: rgba($color-warning, 0.08);
+    border-radius: $border-radius-md;
+
+    h4 {
+      font-size: $font-size-sm;
+      font-weight: 600;
+      margin-bottom: $spacing-xs;
+    }
+
+    p {
+      font-size: $font-size-sm;
+      color: $color-gray-700;
+    }
+  }
+}
+
+// ── Attributes (Sizes & Colors) ───────────────────────
+.admin-attributes {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: $spacing-lg;
+  margin-top: $spacing-xl;
+
+  @include respond-to(md) {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  &__section {
+    background: $color-white;
+    border: 1px solid $color-gray-200;
+    border-radius: $border-radius-lg;
+    padding: $spacing-lg;
+
+    h3 {
+      font-size: $font-size-base;
+      font-weight: 600;
+      color: $color-primary;
+      margin-bottom: $spacing-md;
+    }
+  }
+
+  &__list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: $spacing-xs;
+    margin-bottom: $spacing-md;
+  }
+
+  &__tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 12px;
+    background: $color-gray-100;
+    border: 1px solid $color-gray-200;
+    border-radius: $border-radius-full;
+    font-size: $font-size-sm;
+    color: $color-gray-700;
+  }
+
+  &__color-dot {
+    width: 14px;
+    height: 14px;
+    border-radius: $border-radius-full;
+    border: 1px solid $color-gray-300;
+  }
+
+  &__add {
+    display: flex;
+    gap: $spacing-xs;
+
+    input[type="text"] {
+      flex: 1;
+      padding: 8px 12px;
+      border: 1px solid $color-gray-300;
+      border-radius: $border-radius-md;
+      font-size: $font-size-sm;
+
+      &:focus {
+        outline: none;
+        border-color: $color-secondary;
+      }
+    }
+
+    input[type="color"] {
+      width: 40px;
+      height: 36px;
+      padding: 2px;
+      border: 1px solid $color-gray-300;
+      border-radius: $border-radius-md;
+      cursor: pointer;
+    }
+
+    button {
+      @include flex-center;
+      width: 36px;
+      height: 36px;
+      background: $color-secondary;
+      color: $color-white;
+      border: none;
+      border-radius: $border-radius-md;
+      cursor: pointer;
+      flex-shrink: 0;
+
+      &:hover {
+        background: darken($color-secondary, 8%);
+      }
+    }
+  }
+}

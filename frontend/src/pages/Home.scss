@@ -1,0 +1,306 @@
+@use '../styles/variables' as *;
+@use '../styles/mixins' as *;
+
+.home {
+  // ── Hero ──────────────────────────────────────────────
+  &__hero {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 85vh;
+    padding: $spacing-2xl $spacing-md;
+    max-width: $container-max-width;
+    margin: 0 auto;
+    gap: $spacing-2xl;
+    position: relative;
+    overflow: hidden;
+
+    @include respond-to(lg) {
+      padding: $spacing-3xl $spacing-xl;
+    }
+  }
+
+  &__hero-content {
+    max-width: 560px;
+    z-index: 2;
+  }
+
+  &__hero-tag {
+    display: inline-block;
+    padding: 6px 16px;
+    background: rgba($color-secondary, 0.1);
+    color: $color-secondary;
+    font-size: $font-size-sm;
+    font-weight: 600;
+    border-radius: $border-radius-full;
+    margin-bottom: $spacing-lg;
+    letter-spacing: 0.5px;
+  }
+
+  &__hero-title {
+    font-family: $font-heading;
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    font-weight: 700;
+    color: $color-primary;
+    line-height: 1.1;
+    margin-bottom: $spacing-lg;
+
+    span {
+      color: $color-secondary;
+    }
+  }
+
+  &__hero-text {
+    font-size: $font-size-lg;
+    color: $color-gray-600;
+    line-height: 1.7;
+    margin-bottom: $spacing-xl;
+    max-width: 440px;
+  }
+
+  &__hero-actions {
+    display: flex;
+    gap: $spacing-md;
+    flex-wrap: wrap;
+  }
+
+  &__hero-btn {
+    @include btn-base;
+    padding: 14px 32px;
+    font-size: $font-size-base;
+    font-weight: 600;
+    border-radius: $border-radius-full;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+
+    &--primary {
+      background: $color-secondary;
+      color: $color-white;
+
+      &:hover {
+        background: darken($color-secondary, 8%);
+        transform: translateY(-2px);
+        box-shadow: 0 4px 16px rgba($color-secondary, 0.4);
+      }
+    }
+
+    &--secondary {
+      background: transparent;
+      color: $color-primary;
+      border: 2px solid $color-primary;
+
+      &:hover {
+        background: $color-primary;
+        color: $color-white;
+      }
+    }
+  }
+
+  &__hero-visual {
+    display: none;
+    position: relative;
+
+    @include respond-to(lg) {
+      display: block;
+    }
+  }
+
+  &__hero-shape {
+    width: 420px;
+    height: 420px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, rgba($color-secondary, 0.15), rgba($color-accent, 0.1));
+  }
+
+  // ── Sections ──────────────────────────────────────────
+  &__section {
+    padding: $spacing-3xl 0;
+
+    &--gray {
+      background: $color-gray-100;
+    }
+  }
+
+  &__section-container {
+    @include container;
+  }
+
+  &__section-header {
+    @include flex-between;
+    margin-bottom: $spacing-2xl;
+    flex-wrap: wrap;
+    gap: $spacing-md;
+  }
+
+  &__section-title {
+    font-family: $font-heading;
+    font-size: $font-size-2xl;
+    color: $color-primary;
+  }
+
+  &__section-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: $font-size-sm;
+    font-weight: 600;
+    color: $color-secondary;
+    text-decoration: none;
+
+    &:hover {
+      gap: 10px;
+    }
+  }
+
+  // ── Categories ────────────────────────────────────────
+  &__categories {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: $spacing-md;
+
+    @include respond-to(md) {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+
+  &__category-card {
+    text-decoration: none;
+    text-align: center;
+    background: $color-white;
+    border-radius: $border-radius-lg;
+    overflow: hidden;
+    transition: transform $transition-base, box-shadow $transition-base;
+    border: 1px solid $color-gray-200;
+
+    &:hover {
+      transform: translateY(-4px);
+      box-shadow: $shadow-md;
+    }
+  }
+
+  &__category-image {
+    aspect-ratio: 1;
+    background: linear-gradient(135deg, $color-gray-100, $color-gray-200);
+    overflow: hidden;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+
+  &__category-name {
+    padding: $spacing-md;
+    font-size: $font-size-base;
+    font-weight: 600;
+    color: $color-primary;
+  }
+
+  // ── Product Grid ──────────────────────────────────────
+  &__product-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: $spacing-md;
+
+    @include respond-to(md) {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    @include respond-to(lg) {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+
+  // ── Promo Banner ──────────────────────────────────────
+  &__promo {
+    background: linear-gradient(135deg, $color-primary, $color-accent);
+    padding: $spacing-3xl $spacing-md;
+    text-align: center;
+  }
+
+  &__promo-content {
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  &__promo-tag {
+    display: inline-block;
+    padding: 4px 14px;
+    background: rgba(255, 255, 255, 0.15);
+    color: $color-highlight;
+    font-size: $font-size-xs;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    border-radius: $border-radius-full;
+    margin-bottom: $spacing-md;
+  }
+
+  &__promo-title {
+    font-family: $font-heading;
+    font-size: clamp($font-size-2xl, 4vw, $font-size-3xl);
+    color: $color-white;
+    margin-bottom: $spacing-md;
+  }
+
+  &__promo-text {
+    color: $color-gray-300;
+    margin-bottom: $spacing-xl;
+    font-size: $font-size-base;
+  }
+
+  &__promo-btn {
+    @include btn-base;
+    padding: 14px 36px;
+    background: $color-secondary;
+    color: $color-white;
+    font-weight: 600;
+    border-radius: $border-radius-full;
+
+    &:hover {
+      background: lighten($color-secondary, 5%);
+      transform: translateY(-2px);
+    }
+  }
+
+  // ── Features ──────────────────────────────────────────
+  &__features {
+    padding: $spacing-3xl 0;
+    background: $color-white;
+    border-top: 1px solid $color-gray-200;
+  }
+
+  &__features-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: $spacing-xl;
+
+    @include respond-to(md) {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+
+  &__feature {
+    text-align: center;
+
+    &-icon {
+      font-size: 2rem;
+      margin-bottom: $spacing-sm;
+    }
+
+    h3 {
+      font-family: $font-primary;
+      font-size: $font-size-base;
+      font-weight: 600;
+      color: $color-primary;
+      margin-bottom: $spacing-xs;
+    }
+
+    p {
+      font-size: $font-size-sm;
+      color: $color-gray-500;
+    }
+  }
+}

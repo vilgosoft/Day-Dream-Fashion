@@ -1,0 +1,125 @@
+@use '../../styles/variables' as *;
+@use '../../styles/mixins' as *;
+
+.footer {
+  background: $color-primary;
+  color: $color-gray-300;
+  padding: $spacing-3xl 0 $spacing-lg;
+  margin-top: auto;
+
+  &__container {
+    @include container;
+  }
+
+  &__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: $spacing-2xl;
+
+    @include respond-to(sm) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    @include respond-to(lg) {
+      grid-template-columns: 2fr 1fr 1fr 1.5fr;
+    }
+  }
+
+  &__brand {
+    max-width: 300px;
+  }
+
+  &__logo {
+    font-family: $font-heading;
+    font-size: $font-size-xl;
+    color: $color-white;
+    margin-bottom: $spacing-md;
+
+    em {
+      color: $color-secondary;
+      font-weight: 400;
+    }
+  }
+
+  &__tagline {
+    font-size: $font-size-sm;
+    line-height: 1.7;
+    margin-bottom: $spacing-lg;
+    color: $color-gray-400;
+  }
+
+  &__social {
+    display: flex;
+    gap: $spacing-sm;
+  }
+
+  &__social-link {
+    @include flex-center;
+    width: 36px;
+    height: 36px;
+    border-radius: $border-radius-full;
+    border: 1px solid $color-gray-600;
+    color: $color-gray-400;
+    font-size: 1rem;
+    transition: all $transition-fast;
+
+    &:hover {
+      background: $color-secondary;
+      border-color: $color-secondary;
+      color: $color-white;
+    }
+  }
+
+  &__heading {
+    font-family: $font-primary;
+    font-size: $font-size-base;
+    font-weight: 600;
+    color: $color-white;
+    margin-bottom: $spacing-lg;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: $font-size-sm;
+  }
+
+  &__links {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-sm;
+  }
+
+  &__link {
+    font-size: $font-size-sm;
+    color: $color-gray-400;
+    text-decoration: none;
+    transition: color $transition-fast;
+    padding: 2px 0;
+
+    &:hover {
+      color: $color-secondary;
+    }
+  }
+
+  &__contact-item {
+    display: flex;
+    align-items: flex-start;
+    gap: $spacing-sm;
+    margin-bottom: $spacing-md;
+    font-size: $font-size-sm;
+    color: $color-gray-400;
+
+    svg {
+      flex-shrink: 0;
+      margin-top: 3px;
+      color: $color-secondary;
+    }
+  }
+
+  &__bottom {
+    margin-top: $spacing-2xl;
+    padding-top: $spacing-lg;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    text-align: center;
+    font-size: $font-size-sm;
+    color: $color-gray-500;
+  }
+}
