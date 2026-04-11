@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { FiMail, FiMailOpen, FiEye, FiX } from 'react-icons/fi';
+import { FiMail, FiEye, FiX } from 'react-icons/fi';
 import api from '@/services/api';
 import { toast } from 'react-toastify';
 import './Admin.scss';
@@ -68,7 +68,7 @@ const ContactMessages = () => {
                 <tr key={msg.id} style={{ fontWeight: msg.is_read ? 'normal' : 600 }}>
                   <td>
                     {msg.is_read ? (
-                      <FiMailOpen style={{ color: '#adb5bd' }} />
+                      <FiMail style={{ color: '#adb5bd' }} />
                     ) : (
                       <FiMail style={{ color: '#e94560' }} />
                     )}
