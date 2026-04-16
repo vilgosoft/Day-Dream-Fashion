@@ -344,4 +344,4 @@ INSERT INTO settings (setting_key, setting_value) VALUES
 -- Default admin (password: admin123 — change immediately in production)
 -- Hash generated with PHP: password_hash('admin123', PASSWORD_BCRYPT)
 INSERT INTO admins (name, email, password_hash, role) VALUES
-    ('Super Admin', 'admin@daydreamfashion.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'super_admin');
+    ('Super Admin', 'admin@daydreamfashion.com', '$2y$12$VE9JeRLBXQ9xgY9h2UXEi.Smjy79IyNKk4hSM97tItCgSJgDb1teS', 'super_admin');

@@ -22,7 +22,7 @@ const AdminLogin = () => {
     setLoading(true);
     try {
       const res = await adminService.login(email, password);
-      const { token } = res.data.data;
+      const token = res.data.data.access_token;
       localStorage.setItem('adminToken', token);
       dispatch(setAdminCredentials({ token }));
       toast.success('Admin login successful!');
